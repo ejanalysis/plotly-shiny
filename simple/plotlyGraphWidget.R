@@ -5,7 +5,8 @@ graphOutput <- function(inputId, width="100%", height="550px") {
         singleton(tags$head(
             tags$script(src="plotlyGraphWidget.js")
         )),
-        tags$iframe(id=inputId, src="https://plot.ly/~playground/7",
+        # tags$iframe(id=inputId, src="https://plot.ly/~playground/7",
+        tags$iframe(id=inputId, src="https://plot.ly/~ejanalyst/21",
                     class="graphs", seamless=TRUE, width=width, height=height)
     )
 }
@@ -29,19 +30,19 @@ renderGraph <- function(expr, env=parent.frame(), quoted=FALSE) {
         ## and https://github.com/plotly/Embed-API for more about the postMessage
         ## graph messages
         return(list(
-            list(
-                id="mychart",
-                task="restyle",
-                update=list(
-                    x=list(c(data$x0, data$x1)),
-                    y=list(c(data$y0, data$y1))
-                )
-            ),
-            list(
-                id="mychart",
-                task="relayout",
-                update=list(title=data$title)
-            )
+          list(
+            id="mychart",
+            task="restyle",
+            update=list(xval=list(0:data$xval)
+            #                     x=list(c(data$x0, data$x1)),
+            #                     y=list(c(data$y0, data$y1))
+          )
+        ),
+        list(
+          id="mychart",
+          task="relayout",
+          update=list(title=data$title)
+        )
         ))
     }
 }
